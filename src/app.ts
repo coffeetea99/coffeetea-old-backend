@@ -3,8 +3,30 @@ import * as express from 'express';
 const app = express();
 app.set('port', process.env.port || 3000);
 
+// wrapping function for async handlers
+function wrap(fn) {
+  return async function(req, res, next) {
+    try {
+      await fn(req, res, next);
+    } catch(err) {
+      next(err);
+    }
+  }
+}
+
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.listen(app.get('port'));
+async function initialize() {
+  console.log("initializing...")
+}
+
+app.listen(app.get('port'), async () => {
+  try {
+    await initialize();
+  } catch(err) {
+    console.log("Error occurred on initialization.");
+    console.log(err);
+  }
+});
