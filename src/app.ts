@@ -1,7 +1,9 @@
 import * as express from 'express';
+import * as cors from 'cors'
 
 const app = express();
 app.set('port', process.env.port || 3000);
+app.use(cors());
 
 // wrapping function for async handlers
 function wrap(fn) {
