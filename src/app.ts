@@ -3,7 +3,7 @@ import * as cors from 'cors'
 import db from './database';
 
 const app = express();
-app.set('port', process.env.port || 3000);
+app.set('port', process.env.port || 3009);
 app.use(cors());
 
 // wrapping function for async handlers
