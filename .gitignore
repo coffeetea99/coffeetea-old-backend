@@ -4,5 +4,8 @@
 # typescript-compiled files
 /gen
 
+# sqlite3
+sqlite3.db
+
 # vscode
 /.vscode

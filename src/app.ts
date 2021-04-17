@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as cors from 'cors'
+import db from './database';
 
 const app = express();
 app.set('port', process.env.port || 3000);
@@ -21,14 +22,24 @@ app.get('/', (req, res) => {
 });
 
 async function initialize() {
-  console.log("initializing...")
+  console.log("Start initialization");
+
+  const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS diary(
+      date TEXT PRIMARY KEY,
+      content TEXT
+      )
+  `;
+  db.run(createTableQuery);
+
+  console.log("Finish initialization");
 }
 
 app.listen(app.get('port'), async () => {
   try {
     await initialize();
   } catch(err) {
-    console.log("Error occurred on initialization.");
-    console.log(err);
+    console.error("Error occurred on initialization.");
+    console.error(err);
   }
 });
