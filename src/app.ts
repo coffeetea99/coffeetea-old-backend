@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors'
 import db from './database';
+import route_diary from './router/route_diary';
 
 const app = express();
 app.set('port', process.env.port || 3009);
@@ -21,6 +22,8 @@ function wrap(fn) {
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
+
+app.use('/diary', route_diary);
 
 async function initialize() {
   console.log("Start initialization");
