@@ -26,3 +26,6 @@
 
 - initialize function에 db파일 및 table 생성 추가
 - `.gitignore`에 db 파일 추가
+
+## parse body
+- `req.body` parse 기능 추가

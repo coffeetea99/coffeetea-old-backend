@@ -5,6 +5,7 @@ import db from './database';
 const app = express();
 app.set('port', process.env.port || 3009);
 app.use(cors());
+app.use(express.json());
 
 // wrapping function for async handlers
 function wrap(fn) {
