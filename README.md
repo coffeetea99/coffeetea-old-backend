@@ -32,3 +32,7 @@
 
 ## create diary APIs
 - diary 관련 router(logic을 겸함), database, interface 추가
+
+## create public directory
+- 정적 파일 보관 디렉토리 추가
+- `.gitignore`에 해당 디렉토리 추가
