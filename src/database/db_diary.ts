@@ -5,7 +5,7 @@ import {
 
 export function getList() {
   return new Promise<IDiary[]>((res, rej) => {
-    db.all('SELECT * FROM diary', [], function (err, rows) {
+    db.all('SELECT * FROM diary ORDER BY date DESC', [], function (err, rows) {
       if (err) {
         rej(err);
       }
