@@ -8,7 +8,7 @@
 sqlite3.db
 
 # public files
-/src/public
+/public
 
 # vscode
 /.vscode
