@@ -36,3 +36,7 @@
 ## create public directory
 - 정적 파일 보관 디렉토리 추가
 - `.gitignore`에 해당 디렉토리 추가
+
+## install multer
+- `npm install multer`
+- `npm install -D @types/multer`

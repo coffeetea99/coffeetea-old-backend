@@ -10,10 +10,6 @@ app.use(express.json());
 
 app.use(express.static('src/public'));
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
 app.use('/diary', route_diary);
 
 async function initialize() {
