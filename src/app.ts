@@ -8,17 +8,6 @@ app.set('port', process.env.port || 3009);
 app.use(cors());
 app.use(express.json());
 
-// wrapping function for async handlers
-function wrap(fn) {
-  return async function(req, res, next) {
-    try {
-      await fn(req, res, next);
-    } catch(err) {
-      next(err);
-    }
-  }
-}
-
 app.use(express.static('src/public'));
 
 app.get('/', (req, res) => {

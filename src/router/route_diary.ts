@@ -1,17 +1,8 @@
 import * as express from 'express';
+import { wrap } from '../common/utils';
 import * as db_diary from '../database/db_diary';
 
 const app = express();
-
-function wrap(fn) { // TODO: move to common util file
-  return async function(req, res, next) {
-    try {
-      await fn(req, res, next);
-    } catch(err) {
-      next(err);
-    }
-  }
-}
 
 function validateDate(date: string) {
   const format = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
