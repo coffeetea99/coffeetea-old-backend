@@ -74,7 +74,7 @@ app.post('/', upload.array('images'), wrap(async (req, res) => {
     const originalPath = image.path;
     const newPath = `${image.destination}/${date} ${title}${count === 1 ? '' : ` - ${index + 1}`}.${extension}`;
     fs.renameSync(originalPath, newPath);
-    imagePathList.push(newPath.slice(7));
+    imagePathList.push(newPath.slice('public/image/'.length));
   });
 
   await db_anime.add(date, title, imagePathList);
