@@ -27,8 +27,8 @@ async function initialize() {
   const createAnimeTableQuery = `
     CREATE TABLE IF NOT EXISTS anime(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      title TEXT,
-      date TEXT
+      date TEXT,
+      title TEXT
     );
   `;
   const createAnimeScreenshotTableQuery = `

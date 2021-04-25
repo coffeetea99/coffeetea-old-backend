@@ -27,11 +27,28 @@ app.get('/', wrap(async (req, res) => {
     throw new Error('Invalid request body');
   }
 
-  const diaryList = await db_anime.getList(startIndex, count);
+  const animeList = await db_anime.getList(startIndex, count);
 
   const retValue = {
     success: true,
-    data: diaryList,
+    data: animeList,
+  };
+  res.status(200).send(retValue);
+}));
+
+app.get('/:anime_id', wrap(async (req, res) => {
+  const animeId = Number(req.params.anime_id);
+
+  const isValid = isFinite(animeId);
+  if (!isValid) {
+    throw new Error('Invalid request body');
+  }
+
+  const anime = await db_anime.get(animeId);
+
+  const retValue = {
+    success: true,
+    data: anime,
   };
   res.status(200).send(retValue);
 }));
@@ -61,6 +78,26 @@ app.post('/', upload.array('images'), wrap(async (req, res) => {
   });
 
   await db_anime.add(date, title, imagePathList);
+
+  const retValue = {
+    success: true,
+  }
+  res.status(201).send(retValue);
+}));
+
+app.post('/:anime_id', wrap(async (req, res) => {
+  const animeId = Number(req.params.anime_id);
+  const date: string = req.body.date;
+  const title: string = req.body.title;
+
+  let isValid = isFinite(animeId);
+  isValid = isValid && (date !== undefined)
+  isValid = isValid && (title !== undefined);
+  if (!isValid) {
+    throw new Error('Invalid request body');
+  }
+
+  await db_anime.update(animeId, date, title);
 
   const retValue = {
     success: true,
