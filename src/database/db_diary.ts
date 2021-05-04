@@ -35,3 +35,14 @@ export function add(date: string, content: string) {
     })
   })
 }
+
+export function update(date: string, newDate: string, content: string) {
+  return new Promise<void>((res, rej) => {
+    db.run('UPDATE diary SET date = ?, content = ? WHERE date = ?', [newDate, content, date], function (err) {
+      if (err) {
+        rej(err);
+      }
+      res(null);
+    })
+  })
+}

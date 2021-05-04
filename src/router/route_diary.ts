@@ -54,4 +54,24 @@ app.post('/', wrap(async (req, res) => {
   res.status(201).send(retValue);
 }));
 
+app.post('/:date', wrap(async (req, res) => {
+  const date: string = req.body.date;
+  const newDate: string = req.body.newDate;
+  const content: string = req.body.content;
+
+  let isValid = validateDate(date);
+  isValid = isValid && validateDate(newDate);
+  isValid = isValid && (content !== undefined);
+  if (!isValid) {
+    throw new Error('Invalid request body');
+  }
+
+  await db_diary.update(date, newDate, content);
+
+  const retValue = {
+    success: true,
+  }
+  res.status(201).send(retValue);
+}));
+
 export default app;
