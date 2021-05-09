@@ -21,3 +21,9 @@ export interface IAnimeWithScreenshot extends IAnime {
   date: string;
   screenshots: string[];
 }
+
+export interface IAnisong {
+  id: number;
+  filename: string;
+  description: string;
+}
