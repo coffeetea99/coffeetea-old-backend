@@ -1,13 +1,16 @@
 import * as express from 'express';
 import * as cors from 'cors'
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
 import db from './database';
 import route_diary from './router/route_diary';
 import route_anime from './router/router_anime';
 import route_anisong from './router/router_anisong';
 
+dotenv.config();
+
 const app = express();
-app.set('port', process.env.port || 3009);
+app.set('port', process.env.PORT || 3009);
 app.use(cors());
 app.use(express.json());
 
