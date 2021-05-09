@@ -54,9 +54,9 @@ async function initialize() {
   db.run(createAnisongTableQuery);
 
   try {
-    fs.readdirSync('public/image');
+    fs.readdirSync('public/image/animeScreenshot');
   } catch {
-    fs.mkdirSync('public/image', { recursive: true });
+    fs.mkdirSync('public/image/animeScreenshot', { recursive: true });
   }
 
   try {
