@@ -10,3 +10,7 @@ export function wrap(fn: (req: Request, res: Response, next: NextFunction) => Pr
     }
   }
 }
+
+export function sleep(milisecond: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, milisecond));
+}

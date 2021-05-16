@@ -1,26 +1,30 @@
 import db from './index';
 import {
   IAnisong,
+  IAnisongPoll,
+  IAnisongScoreboard,
 } from '../types/interface';
 
 export async function initialize() {
   db.serialize(function() {
-    db.run(`DROP TABLE IF EXISTS poll`);
-    db.run(`DROP TABLE IF EXISTS scoreboard`);
+    db.run(`DROP TABLE IF EXISTS anisong_poll`);
+    db.run(`DROP TABLE IF EXISTS anisong_scoreboard`);
     db.run(`
-      CREATE TABLE poll(
+      CREATE TABLE anisong_poll(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT
       );
     `);
     db.run(`
-      CREATE TABLE scoreboard(
+      CREATE TABLE anisong_scoreboard(
         name TEXT PRIMARY KEY,
-        score INTEGER
+        score INTEGER DEFAULT 0
       );
     `);
   })
 }
+
+// anisong
 
 export async function insert(filename: string, description: string) {
   return new Promise<void>((res, rej) => {
@@ -42,4 +46,28 @@ export async function select() {
       res(rows);
     });
   });
+}
+
+// poll
+
+export async function pullPoll(maxPollId: number) {
+  return new Promise<IAnisongPoll[]>((res, rej) => {
+    db.all('SELECT * FROM anisong_poll WHERE id > ?', [maxPollId], function (err, rows) {
+      if (err) {
+        rej(err);
+      }
+      res(rows);
+    });
+  });
+}
+
+export async function insertPoll(name: string) {
+  return new Promise<void>((res, rej) => {
+    db.run('INSERT INTO anisong_poll(name) values (?)', [name], function (err) {
+      if (err) {
+        rej(err);
+      }
+      res(null);
+    })
+  })
 }

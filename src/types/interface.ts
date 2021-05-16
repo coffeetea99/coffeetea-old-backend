@@ -27,3 +27,13 @@ export interface IAnisong {
   filename: string;
   description: string;
 }
+
+export interface IAnisongPoll {
+  id: number;
+  name: string;
+}
+
+export interface IAnisongScoreboard {
+  name: string;
+  score: number;
+}
