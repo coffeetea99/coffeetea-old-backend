@@ -105,4 +105,49 @@ app.post('/poll/add', wrap(async (req, res) => {
   res.status(201).send(retValue);
 }));
 
+// scoreboard
+
+app.get('/scoreboard/list', wrap(async (req, res) => {
+  const scoreboardList = await db_anisong.selectScoreboard();
+
+  const retValue = {
+    success: true,
+    scoreboard_list: scoreboardList,
+  };
+  res.status(200).send(retValue);
+
+}));
+
+app.post('/scoreboard/add', wrap(async (req, res) => {
+  const name = req.body.name;
+
+  const isValid = (name !== undefined);
+  if (!isValid) {
+    throw new Error('Invalid request body');
+  }
+
+  await db_anisong.insertScoreboard(name);
+
+  const retValue = {
+    success: true,
+  };
+  res.status(201).send(retValue);
+}));
+
+app.post('/scoreboard/score', wrap(async (req, res) => {
+  const name = req.body.name;
+
+  const isValid = (name !== undefined);
+  if (!isValid) {
+    throw new Error('Invalid request body');
+  }
+
+  await db_anisong.addScore(name);
+
+  const retValue = {
+    success: true,
+  };
+  res.status(201).send(retValue);
+}));
+
 export default app;
